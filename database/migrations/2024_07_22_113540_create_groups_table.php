@@ -20,7 +20,6 @@ class CreateGroupsTable extends Migration
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->string('edit')->nullable();
             
             // 外部キー制約
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
