@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Group;
@@ -26,7 +25,6 @@ class GroupController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'description' => 'nullable',
-            'user_ids' => 'required|array',
         ]);
 
         $group = Group::create([

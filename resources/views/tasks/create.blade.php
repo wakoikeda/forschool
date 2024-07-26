@@ -22,8 +22,6 @@
         <div class="form-group">
             <input type="text" name="title" placeholder="タスク名"/><br>
             <input type="text" name="description" placeholder="メモ"/><br>
-        </div>
-        <div class="form-group">
             <label for="group_id">グループ:</label>
             <select name="group_id" id="group_id" class="form-control">
                 <option value="">選択してください</option>
@@ -33,7 +31,6 @@
             </select>
         </div>
         <button type="submit" class="btn btn-primary">作成</button>
-        <a href="{{ route('tasks.index') }}" class="btn btn-secondary">戻る</a>
     </form>
 </body>
 </html>

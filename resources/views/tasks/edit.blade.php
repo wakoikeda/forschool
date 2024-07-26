@@ -10,9 +10,10 @@
     <x-app-layout>
     <x-slot name="header">
         <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-            三育学院中等教育学校　JAA
+            Edit Task
         </h1>
     </x-slot>
+
     <h2>Edit Task</h2>
     <form action="{{ route('tasks.update', $task->id) }}" method="POST">
         @csrf
@@ -34,10 +35,10 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="group_id">グループ:</label>
+            <label for="group_id">グループ</label>
             <select name="group_id" class="form-control">
                 <option value="">選択してください</option>
-                @foreach($groups as $group)
+                @foreach ($groups as $group)
                     <option value="{{ $group->id }}" {{ $task->group_id == $group->id ? 'selected' : '' }}>{{ $group->name }}</option>
                 @endforeach
             </select>

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,4 +19,9 @@ class Task extends Model
         'group_id',
         'assigned_to',
     ];
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
 }

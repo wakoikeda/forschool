@@ -60,33 +60,29 @@
                                     </li>
                                 @endforeach
                             </ul>
-                            
-                             <h3>Groups List</h3>
+
+                            <h3>Groups List</h3>
                             <ul class="list-group">
                                 @foreach ($groups as $group)
-                             <li class="list-group-item">
-                             <form action="{{ route('groups.update', $group->id) }}" method="POST" style="display:inline;">
-                             @csrf
-                             @method('PUT')
-                             <div class="form-group">
-                           <a href="{{ route('groups.show', $group->id) }}">{{ $group->name }}</a>
-                    　</div>
-               　　 </form>
-                <form id="form_{{ $group->id }}" action="{{ route('groups.destroy', $group->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="button" class="btn btn-danger" onclick="confirmDelete({{ $group->id }});">削除</button>
-                </form>
-                <a href="{{ route('groups.edit', $group->id) }}" class="btn btn-info">編集</a>
-            </li>
-                             @endforeach
-         </ul>
-    
-      </ul>
-                            
-                            
-                                <a href="{{ route('groups.create') }}" class="btn btn-primary">Create Group</a>
-                            
+                                    <li class="list-group-item">
+                                        <form action="{{ route('groups.update', $group->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="form-group">
+                                                <a href="{{ route('groups.show', $group->id) }}">{{ $group->name }}</a>
+                                            </div>
+                                        </form>
+                                        <form id="form_{{ $group->id }}" action="{{ route('groups.destroy', $group->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" class="btn btn-danger" onclick="confirmDelete({{ $group->id }});">削除</button>
+                                        </form>
+                                        <a href="{{ route('groups.edit', $group->id) }}" class="btn btn-info">編集</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+
+                            <a href="{{ route('groups.create') }}" class="btn btn-primary">Create Group</a>
 
                             <script>
                                 function confirmDelete(id) {
