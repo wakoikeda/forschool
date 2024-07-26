@@ -33,6 +33,15 @@
                 <option value="completed" {{ $task->status == 'completed' ? 'selected' : '' }}>Completed</option>
             </select>
         </div>
+        <div class="form-group">
+            <label for="group_id">グループ:</label>
+            <select name="group_id" class="form-control">
+                <option value="">選択してください</option>
+                @foreach($groups as $group)
+                    <option value="{{ $group->id }}" {{ $task->group_id == $group->id ? 'selected' : '' }}>{{ $group->name }}</option>
+                @endforeach
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">更新</button>
     </form>
     </x-app-layout>

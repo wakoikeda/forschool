@@ -23,6 +23,7 @@ class TaskSeeder extends Seeder
         $groupIds = DB::table('groups')->pluck('id')->toArray();
 
         for ($i = 0; $i < 10; $i++) {
+
             DB::table('tasks')->insert([
                 'user_id' => $faker->randomElement($userIds), // 存在するユーザーIDを使用
                 'title' => $faker->sentence,
@@ -35,8 +36,8 @@ class TaskSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
                 'deleted_at' => null,
-                'edit' => $faker->sentence
             ]);
         }
     }
 }
+?>
