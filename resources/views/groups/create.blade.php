@@ -22,9 +22,7 @@
         <div class="form-group">
             <input type="text" name="name" placeholder="グループ名"/><br>
             <input type="text" name="description" placeholder="説明"/><br>
-        </div>
-        <div class="form-group">
-            <label for="user_ids">ユーザーを選択:</label>
+            <label for="user_ids">メンバー選択:</label>
             <select name="user_ids[]" id="user_ids" class="form-control" multiple>
                 @foreach($users as $user)
                     <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -32,7 +30,6 @@
             </select>
         </div>
         <button type="submit" class="btn btn-primary">作成</button>
-        <a href="{{ route('tasks.index') }}" class="btn btn-secondary">戻る</a>
     </form>
 </body>
 </html>

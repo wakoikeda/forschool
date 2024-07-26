@@ -35,8 +35,13 @@ Route::middleware(['auth'])->group(function () {
 
 // グループ管理ルート
 Route::middleware(['auth'])->group(function () {
-    Route::get('/groups/create', [GroupController::class, 'create'])->name('groups.create');
+    Route::get('/groups', [GroupController::class, 'index'])->name('groups.index');
     Route::post('/groups', [GroupController::class, 'store'])->name('groups.store');
+    Route::get('/groups/create', [GroupController::class, 'create'])->name('groups.create'); 
+    Route::get('/groups/{id}', [GroupController::class, 'show'])->name('groups.show');
+    Route::get('/groups/{id}/edit', [GroupController::class, 'edit'])->name('groups.edit');
+    Route::put('/groups/{id}', [GroupController::class, 'update'])->name('groups.update');
+    Route::delete('/groups/{id}', [GroupController::class, 'destroy'])->name('groups.destroy');
 });
 
 // 認証ルート
