@@ -11,9 +11,9 @@ Route::get('/', function () {
 });
 
 // Breezeが追加する認証ルート
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');
 
 // タスク管理ルート
 Route::middleware(['auth'])->group(function () {
