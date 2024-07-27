@@ -5,9 +5,21 @@
     <title>for school app</title>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <!-- Bootstrap CSS (必要に応じて追加) -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .btn {
+        .btn-custom {
             margin: 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -31,7 +43,7 @@
                                 </div>
                             @endif
 
-                            <a href="{{ route('tasks.create') }}" class="btn btn-primary">Create Task</a>
+                            <a href="{{ route('tasks.create') }}" class="btn btn-custom">Create Task</a>
 
                             <h3>Tasks List</h3>
                             <ul class="list-group">
@@ -82,7 +94,7 @@
                                 @endforeach
                             </ul>
 
-                            <a href="{{ route('groups.create') }}" class="btn btn-primary">Create Group</a>
+                            <a href="{{ route('groups.create') }}" class="btn btn-custom">Create Group</a>
 
                             <script>
                                 function confirmDelete(id) {
@@ -99,3 +111,4 @@
     </x-app-layout>
 </body>
 </html>
+`
