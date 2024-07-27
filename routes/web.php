@@ -6,9 +6,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GroupController; // GroupControllerをインポート
 
 // 認証ルート
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // Breezeが追加する認証ルート
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 // タスク管理ルート
 Route::middleware(['auth'])->group(function () {
-    Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
+    Route::get('/', [TaskController::class, 'index'])->name('tasks.index');
     Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
     Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create'); 
     Route::get('/tasks/{id}', [TaskController::class, 'show'])->name('tasks.show');
