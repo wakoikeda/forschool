@@ -3,7 +3,6 @@
         <h1 class="font-semibold text-xl text-gray-800 leading-tight">
             三育学院中等教育学校　JAA
         </h1>
-        <h2>{{ Auth::user()->name }}</h2>
     </x-slot>
 
     <div class="py-12">
