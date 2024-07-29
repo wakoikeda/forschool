@@ -67,7 +67,7 @@
                             @endforeach
                         </ul>
 
-                        <a href="{{ route('groups.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create Group</a>
+                       
 
                         <script>
                             function confirmDelete(id) {
