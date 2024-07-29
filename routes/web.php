@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GroupController; // GroupControllerをインポート
+use App\Http\Controllers\Auth\RegisteredUserController;
+
 
 // 認証ルート
 // Route::get('/', function () {
@@ -46,3 +48,10 @@ Route::middleware(['auth'])->group(function () {
 
 // 認証ルート
 require __DIR__.'/auth.php';
+
+Route::get('/register', [RegisteredUserController::class, 'create'])
+    ->middleware('guest')
+    ->name('register');
+
+Route::post('/register', [RegisteredUserController::class, 'store'])
+    ->middleware('guest');
