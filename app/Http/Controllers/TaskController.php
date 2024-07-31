@@ -1,23 +1,33 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Models\Task;
 use App\Models\Group; // Groupモデルをインポート
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
-      public function index()
+    public function index()
     {
-        $tasks = Task::all();
-        $groups = Group::all(); // すべてのグループを取得
-        return view('tasks.index', compact('tasks', 'groups'));
+        // ログインユーザーの所属グループを取得
+        $groups = Auth::user()->groups;
+
+        // グループごとのタスクを取得
+        $tasksByGroup = [];
+        foreach ($groups as $group) {
+            $tasksByGroup[$group->name] = Task::where('group_id', $group->id)->get();
+        }
+
+        return view('tasks.index', compact('tasksByGroup', 'groups'));
     }
 
     public function create()
     {
-        $groups = Group::all(); // すべてのグループを取得
+        // ログインユーザーの所属グループを取得
+        $groups = Auth::user()->groups;
+
         return view('tasks.create', compact('groups'));
     }
 
@@ -30,11 +40,11 @@ class TaskController extends Controller
         ]);
 
         Task::create([
-        'title' => $request->input('title'),
-        'description' => $request->input('description'),
-        'group_id' => $request->input('group_id'),
-        'user_id' => Auth::id(), // 現在のユーザーのIDを設定
-    ]);
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'group_id' => $request->input('group_id'),
+        ]);
+
         return redirect()->route('tasks.index')->with('success', 'Task created successfully.');
     }
 
@@ -47,7 +57,8 @@ class TaskController extends Controller
     public function edit($id)
     {
         $task = Task::findOrFail($id);
-        $groups = Group::all();
+        $groups = Auth::user()->groups;
+
         return view('tasks.edit', compact('task', 'groups'));
     }
 
@@ -56,12 +67,16 @@ class TaskController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'description' => 'nullable',
-            'status' => 'required|in:pending,in_progress,completed',
             'group_id' => 'nullable|exists:groups,id',
+            'status' => 'required|in:pending,in_progress,completed',
         ]);
 
         $task = Task::findOrFail($id);
-        $task->update($request->only('title', 'description', 'status', 'group_id'));
+        $task->title = $request->input('title');
+        $task->description = $request->input('description');
+        $task->group_id = $request->input('group_id');
+        $task->status = $request->input('status');
+        $task->save();
 
         return redirect()->route('tasks.index')->with('success', 'Task updated successfully.');
     }

@@ -1,8 +1,8 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Group;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,13 +10,16 @@ class GroupController extends Controller
 {
     public function index()
     {
-        $groups = Group::all();
+        // ログインユーザーの属するグループを取得
+        $groups = Auth::user()->groups;
+
         return view('groups.index', compact('groups'));
     }
 
     public function create()
     {
-        $users = User::all(); // すべてのユーザーを取得
+        $users = Auth::user()->all(); // すべてのユーザーを取得
+
         return view('groups.create', compact('users'));
     }
 
@@ -25,6 +28,7 @@ class GroupController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'description' => 'nullable',
+            'user_ids' => 'required|array',
         ]);
 
         $group = Group::create([
@@ -41,6 +45,7 @@ class GroupController extends Controller
     public function show($id)
     {
         $group = Group::findOrFail($id);
+
         return view('groups.show', compact('group'));
     }
 
@@ -48,6 +53,7 @@ class GroupController extends Controller
     {
         $group = Group::findOrFail($id);
         $users = User::all();
+
         return view('groups.edit', compact('group', 'users'));
     }
 
