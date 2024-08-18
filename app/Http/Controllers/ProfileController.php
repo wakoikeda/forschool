@@ -19,14 +19,16 @@ class ProfileController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
-            // 他のバリデーションルールも追加可能
+            'background' => 'required|string',
         ]);
 
         $user = Auth::user();
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->background = $request->background;
         $user->save();
-
+    
         return redirect()->route('profile.edit')->with('success', 'Profile updated successfully.');
+        
     }
 }
