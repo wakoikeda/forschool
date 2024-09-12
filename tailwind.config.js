@@ -17,5 +17,9 @@ export default {
         },
     },
 
+    corePlugins: {
+        preflight: false, // ここでPreflight（リセット）を無効にします
+    },
+
     plugins: [forms],
 };
