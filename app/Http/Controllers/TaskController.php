@@ -43,6 +43,7 @@ class TaskController extends Controller
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'group_id' => $request->input('group_id'),
+            'user_id' => Auth::id(),
         ]);
 
         return redirect()->route('tasks.index')->with('success', 'Task created successfully.');

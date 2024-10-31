@@ -1,9 +1,7 @@
 
 <x-app-layout>
     <x-slot name="header">
-        <h1 class="header-title">
-            三育学院中等教育学校 JAA
-        </h1>
+       
     </x-slot>
 
     <div class="container">
@@ -17,7 +15,7 @@
                             </div>
                         @endif
 
-                        <a href="{{ route('tasks.create') }}" class="create-button">Create Task</a>
+                        <a href="{{ route('tasks.create') }}" class="btn btn-outline-dark">Create Task</a>
 
                         @foreach ($tasksByGroup as $groupName => $tasks)
                             <div class="task-group">
@@ -25,20 +23,28 @@
                                 <ul class="task-list">
                                     @foreach ($tasks as $task)
                                         <li class="task-item">
-                                            <form action="{{ route('tasks.update', $task->id) }}" method="POST" class="inline">
+                                        <div class="card text-bg-info mb-3" style="max-width: 18rem;">
+                                        <div class="card-header">
+                                             <form action="{{ route('tasks.update', $task->id) }}" method="POST" class="inline">
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="task-details">
-                                                    <a href="{{ route('tasks.show', $task->id) }}" class="task-title">{{ $task->title }}</a>
-                                                    <p class="task-description">メモ: {{ $task->description }}</p>
-                                                    <label for="status-{{ $task->id }}" class="status-label">進捗状況:</label>
-                                                    <select id="status-{{ $task->id }}" name="status" class="status-select" onchange="this.form.submit()">
-                                                        <option value="pending" {{ $task->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                                                        <option value="in_progress" {{ $task->status == 'in_progress' ? 'selected' : '' }}>In Progress</option>
-                                                        <option value="completed" {{ $task->status == 'completed' ? 'selected' : '' }}>Completed</option>
-                                                    </select>
-                                                </div>
-                                            </form>
+                                                     <!-- タスクのタイトル -->
+                                                <a href="{{ route('tasks.show', $task->id) }}" class="task-title">{{ $task->title }}</a>
+                                                    <!-- タスクの進捗状況 -->
+                                                <label for="status-{{ $task->id }}" class="status-label">進捗状況:</label>
+                                             <select id="status-{{ $task->id }}" name="status" class="form-select form-select-sm" onchange="this.form.submit()">
+                                            <option value="pending" {{ $task->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                         <option value="in_progress" {{ $task->status == 'in_progress' ? 'selected' : '' }}>In Progress</option>
+                                        <option value="completed" {{ $task->status == 'completed' ? 'selected' : '' }}>Completed</option>
+                                    </select>
+                                 </div>
+                                 </form>
+                                 </div>
+                                 <div class="card-body">
+                                     <!-- タスクの詳細説明 -->
+                                 <p class="card-text">メモ: {{ $task->description }}</p>
+                            
                                             <form id="form_{{ $task->id }}" action="{{ route('tasks.destroy', $task->id) }}" method="POST" class="inline">
                                                 @csrf
                                                 @method('DELETE')
@@ -49,6 +55,8 @@
                                     @endforeach
                                 </ul>
                             </div>
+                         </div>
+                     </div>
                         @endforeach
 
                         <h3 class="groups-title">Groups List</h3>
@@ -65,14 +73,14 @@
                                     <form id="form_{{ $group->id }}" action="{{ route('groups.destroy', $group->id) }}" method="POST" class="inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" class="delete-button" onclick="confirmDelete({{ $group->id }});">削除</button>
+                                        <button class="btn btn-outline-dark" onclick="confirmDelete({{ $group->id }});">削除</button>
                                     </form>
                                     <a href="{{ route('groups.edit', $group->id) }}" class="edit-button">編集</a>
                                 </li>
                             @endforeach
                         </ul>
 
-                        <a href="{{ route('groups.create') }}" class="create-button">Create Group</a>
+                        <a href="{{ route('groups.create') }}" class="btn btn-outline-dark">Create Group</a>
 
                         <script>
                             function confirmDelete(id) {
