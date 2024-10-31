@@ -1,3 +1,8 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 
+.container.mt-4 {
+    /* .container.mt-4 の両方がある要素にだけ適用されるスタイル */
+    max-width: 70vw;
+    margin-top: 2rem; /* 独自の上部マージン */
+}
 
