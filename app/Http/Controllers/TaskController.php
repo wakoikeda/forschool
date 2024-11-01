@@ -77,6 +77,7 @@ class TaskController extends Controller
         $task->description = $request->input('description');
         $task->group_id = $request->input('group_id');
         $task->status = $request->input('status');
+         dd($task->status); 
         $task->save();
 
         return redirect()->route('tasks.index')->with('success', 'Task updated successfully.');
