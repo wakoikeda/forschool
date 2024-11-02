@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\GroupController; // GroupControllerをインポート
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\TodoController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+
 
 
 // 認証ルート
@@ -20,6 +22,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 // タスク管理ルート
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [TaskController::class, 'index'])->name('tasks.index');
+    Route::resource('todo', TodoController::class);
     Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
     Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create'); 
     Route::get('/tasks/{id}', [TaskController::class, 'show'])->name('tasks.show');
@@ -45,6 +48,17 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/groups/{id}', [GroupController::class, 'update'])->name('groups.update');
     Route::delete('/groups/{id}', [GroupController::class, 'destroy'])->name('groups.destroy');
 });
+
+
+//TO-DOリスト
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/todo', [TodoController::class, 'index'])->name('todo.index'); // TO-DO リストの一覧
+    Route::get('/todo/create', [TodoController::class, 'create'])->name('todo.create'); // 作成ページ
+    Route::post('/todo', [TodoController::class, 'store'])->name('todo.store'); // 新規作成の保存
+});
+
+
 
 // 認証ルート
 require __DIR__.'/auth.php';

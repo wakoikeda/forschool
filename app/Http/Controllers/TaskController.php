@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Group; // Groupモデルをインポート
 use App\Models\Task;
+use App\Models\Todo; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,8 +20,11 @@ class TaskController extends Controller
         foreach ($groups as $group) {
             $tasksByGroup[$group->name] = Task::where('group_id', $group->id)->get();
         }
+       
+        
+        $todos = Todo::all();
 
-        return view('tasks.index', compact('tasksByGroup', 'groups'));
+        return view('tasks.index', compact('tasksByGroup', 'groups','todos'));
     }
 
     public function create()
