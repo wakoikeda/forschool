@@ -69,17 +69,11 @@
                             <label for="day{{ $i }}" class="form-label">
                                 Day {{ $i == 1 ? 0 : $i - 1 }}
                             </label>
-                        </div>
-                    @endfor
-                </div>
-            </div>
-        @endforeach
-    </div>
-
-    <!-- ページセット追加セクション -->
-    <div id="pageSetContainer" class="container mt-4">
+                            <div id="pageSetContainer" class="container mt-4">
         <div class="page-set mb-4">
             <h5>既存のページセット</h5>
+             <!-- 新しいページセットを追加するボタン -->
+        <button onclick="addPageSet()" class="btn btn-outline-primary mb-3">＋ ページセットを追加</button>
             <div class="mb-3">
                 <input type="text" class="form-control" placeholder="テキスト名を入力">
             </div>
@@ -102,10 +96,16 @@
             <div id="pageContainer1" class="d-flex flex-wrap gap-2 mt-3"></div>
         </div>
 
-        <!-- 新しいページセットを追加するボタン -->
-        <button onclick="addPageSet()" class="btn btn-outline-primary mb-3">＋ ページセットを追加</button>
+       
+    </div>
+                        </div>
+                    @endfor
+                </div>
+            </div>
+        @endforeach
     </div>
 
+   
     <script>
         let setCount = 1; // 既存セットのカウントから開始
 
@@ -134,10 +134,11 @@
                         <option value="odd">奇数ページ</option>
                     </select>
                 </div>
-                <button onclick="generatePages(${setCount})" class="btn btn-primary mb-3">ページを生成</button>
+                
                 <div id="pageContainer${setCount}" class="d-flex flex-wrap gap-2 mt-3"></div>
-            `;
-
+           
+            <button onclick="generatePages(${setCount})" class="btn btn-primary mb-3">ページを生成</button>
+             `;
             document.getElementById('pageSetContainer').appendChild(pageSetDiv);
         }
 
