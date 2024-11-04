@@ -57,7 +57,11 @@
     margin-bottom: 1.5rem;
 }
 
-
+.day-container {
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
 
 .page-set-container {
     padding: 10px;
@@ -82,4 +86,7 @@
     background-color: #eb6ea0;
 }
 
+.btn-primary{
+    color:#eb6ea0 !important;
+}
 

@@ -108,7 +108,6 @@
             `;
             setCount++;
 
-            // ボタンの親要素の中にある page-set-container に追加
             button.nextElementSibling.appendChild(pageSetDiv);
         }
 
@@ -118,7 +117,7 @@
         }
 
         function generatePages(button) {
-            const pageContainer = button.nextElementSibling;
+            const pageContainer = button.nextElementSibling.nextElementSibling; // 次の次の要素でページボタン用のコンテナを指定
             pageContainer.innerHTML = ''; // 既存のページボタンをクリア
 
             const startPage = parseInt(button.previousElementSibling.previousElementSibling.children[0].children[0].value);
@@ -134,8 +133,22 @@
                 pageButton.innerText = `Page ${i}`;
                 pageButton.onclick = function() {
                     pageButton.classList.toggle('btn-success');
+                    saveButtonState(pageButton);
                 };
+                
+                applyButtonState(pageButton); // 状態を適用
                 pageContainer.appendChild(pageButton);
+            }
+        }
+
+        function saveButtonState(button) {
+            localStorage.setItem(button.innerText, button.classList.contains('btn-success'));
+        }
+
+        function applyButtonState(button) {
+            const isActive = localStorage.getItem(button.innerText) === 'true';
+            if (isActive) {
+                button.classList.add('btn-success');
             }
         }
     </script>
