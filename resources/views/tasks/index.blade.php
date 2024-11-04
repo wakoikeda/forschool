@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header"></x-slot>
-    
+
     <!-- Create Task and Create Group Buttons -->
     <div class="position-fixed start-0 top-50 translate-middle-y d-flex flex-column gap-2 ms-5">
         <a href="{{ route('tasks.create') }}" class="btn btn-outline-dark">Create Task</a>
         <a href="{{ route('groups.create') }}" class="btn btn-outline-dark">Create Group</a>
-        <a href="{{ route('todo.create')}}" class="btn btn-outline-dark">TO-DO作成</a>
+        <a href="{{ route('todo.create') }}" class="btn btn-outline-dark">TO-DO作成</a>
     </div>
 
     <div class="container mt-4" style="max-width: 60vw;">
@@ -47,7 +47,7 @@
                 </div>
             </div>
         @endforeach
-        
+
         <!-- TO-DO List Section -->
         @foreach ($todos as $todo)
             <div class="todo-item mt-5">
@@ -57,7 +57,7 @@
                 <p>終了日: {{ $todo->to }}</p>
 
                 <!-- グリッド生成 -->
-                <div class="row row-cols-auto" style="max-width: 100%;">
+                <div class="row row-cols-3 g-3">
                     @php
                         $fromDate = new DateTime($todo->from);
                         $toDate = new DateTime($todo->to);
@@ -65,39 +65,12 @@
                     @endphp
 
                     @for ($i = $interval; $i >= 1; $i--)
-                        <div class="col border p-3 text-center">
+                        <div class="col border p-3 text-start day-container rounded shadow-sm bg-light">
                             <label for="day{{ $i }}" class="form-label">
                                 Day {{ $i == 1 ? 0 : $i - 1 }}
                             </label>
-                            <div id="pageSetContainer" class="container mt-4">
-        <div class="page-set mb-4">
-            <h5>既存のページセット</h5>
-             <!-- 新しいページセットを追加するボタン -->
-        <button onclick="addPageSet()" class="btn btn-outline-primary mb-3">＋ ページセットを追加</button>
-            <div class="mb-3">
-                <input type="text" class="form-control" placeholder="テキスト名を入力">
-            </div>
-            <div class="row mb-3">
-                <div class="col">
-                    <input type="number" id="startPage1" class="form-control" placeholder="開始ページ">
-                </div>
-                <div class="col">
-                    <input type="number" id="endPage1" class="form-control" placeholder="終了ページ">
-                </div>
-            </div>
-            <div class="mb-3">
-                <select id="pageOption1" class="form-select">
-                    <option value="all">すべてのページ</option>
-                    <option value="even">偶数ページ</option>
-                    <option value="odd">奇数ページ</option>
-                </select>
-            </div>
-            <button onclick="generatePages(1)" class="btn btn-primary mb-3">ページを生成</button>
-            <div id="pageContainer1" class="d-flex flex-wrap gap-2 mt-3"></div>
-        </div>
-
-       
-    </div>
+                            <button onclick="addPageSet(this)" class="btn btn-outline-primary btn-sm mt-2 rounded-pill px-3">＋</button>
+                            <div class="page-set-container mt-2"></div>
                         </div>
                     @endfor
                 </div>
@@ -105,66 +78,59 @@
         @endforeach
     </div>
 
-   
     <script>
-        let setCount = 1; // 既存セットのカウントから開始
+        let setCount = 1;
 
-        function addPageSet() {
-            setCount++;
-
+        function addPageSet(button) {
             const pageSetDiv = document.createElement('div');
-            pageSetDiv.className = 'page-set mb-4';
+            pageSetDiv.className = 'page-set mb-2';
             pageSetDiv.innerHTML = `
-                <h5>ページセット ${setCount}</h5>
-                <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="テキスト名を入力">
-                </div>
-                <div class="row mb-3">
+                <h6>ページセット ${setCount}</h6>
+                <input type="text" class="form-control mb-2" placeholder="テキスト名を入力">
+                <div class="row mb-2">
                     <div class="col">
-                        <input type="number" id="startPage${setCount}" class="form-control" placeholder="開始ページ">
+                        <input type="number" class="form-control" placeholder="開始ページ">
                     </div>
                     <div class="col">
-                        <input type="number" id="endPage${setCount}" class="form-control" placeholder="終了ページ">
+                        <input type="number" class="form-control" placeholder="終了ページ">
                     </div>
                 </div>
-                <div class="mb-3">
-                    <select id="pageOption${setCount}" class="form-select">
+                <div class="mb-2">
+                    <select class="form-select">
                         <option value="all">すべてのページ</option>
                         <option value="even">偶数ページ</option>
                         <option value="odd">奇数ページ</option>
                     </select>
                 </div>
-                
-                <div id="pageContainer${setCount}" class="d-flex flex-wrap gap-2 mt-3"></div>
-           
-            <button onclick="generatePages(${setCount})" class="btn btn-primary mb-3">ページを生成</button>
-             `;
-            document.getElementById('pageSetContainer').appendChild(pageSetDiv);
+                <button onclick="generatePages(this)" class="btn btn-primary btn-sm mb-2">ページを生成</button>
+                <button onclick="removePageSet(this)" class="btn btn-danger btn-sm">削除</button>
+                <div class="page-buttons mt-2 d-flex flex-wrap gap-2"></div>
+            `;
+            setCount++;
+
+            // ボタンの親要素の中にある page-set-container に追加
+            button.nextElementSibling.appendChild(pageSetDiv);
         }
 
-        function generatePages(setId) {
-            const startPageInput = document.getElementById(`startPage${setId}`);
-            const endPageInput = document.getElementById(`endPage${setId}`);
-            const pageOptionSelect = document.getElementById(`pageOption${setId}`);
+        function removePageSet(button) {
+            const pageSetDiv = button.closest('.page-set');
+            pageSetDiv.remove();
+        }
 
-            if (!startPageInput || !endPageInput || !pageOptionSelect) {
-                console.error(`IDが見つかりません: startPage${setId} または endPage${setId} または pageOption${setId}`);
-                return;
-            }
+        function generatePages(button) {
+            const pageContainer = button.nextElementSibling;
+            pageContainer.innerHTML = ''; // 既存のページボタンをクリア
 
-            const startPage = parseInt(startPageInput.value);
-            const endPage = parseInt(endPageInput.value);
-            const pageOption = pageOptionSelect.value;
-
-            const pageContainer = document.getElementById(`pageContainer${setId}`);
-            pageContainer.innerHTML = '';
+            const startPage = parseInt(button.previousElementSibling.previousElementSibling.children[0].children[0].value);
+            const endPage = parseInt(button.previousElementSibling.previousElementSibling.children[1].children[0].value);
+            const pageOption = button.previousElementSibling.querySelector('select').value;
 
             for (let i = startPage; i <= endPage; i++) {
                 if (pageOption === 'even' && i % 2 !== 0) continue;
                 if (pageOption === 'odd' && i % 2 === 0) continue;
 
                 const pageButton = document.createElement('button');
-                pageButton.className = 'btn btn-outline-secondary page-button';
+                pageButton.className = 'btn btn-outline-secondary page-button btn-sm';
                 pageButton.innerText = `Page ${i}`;
                 pageButton.onclick = function() {
                     pageButton.classList.toggle('btn-success');
