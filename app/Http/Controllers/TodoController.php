@@ -17,7 +17,7 @@ class TodoController extends Controller
     // TO-DO作成フォームの表示
     public function create()
     {
-        return view('todo.create'); // create.blade.php を表示する
+        return view('todos.create'); // create.blade.php を表示する
     }
 
     // TO-DOリストアイテムの保存
@@ -41,4 +41,12 @@ class TodoController extends Controller
 
         return redirect()->route('tasks.index')->with('success', '新しいTO-DOを作成しました！');
     }
+    public function destroy($id)
+    {
+        $todo = Todo::findOrFail($id);
+        $todo->delete();
+    
+        return redirect()->route('tasks.index')->with('success', 'TO-DOが削除されました');
+    }
+
 }

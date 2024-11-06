@@ -19,7 +19,7 @@
         </div>
     @endif
     
-    <form action="{{ route('todo.store') }}" method="POST">
+    <form action="{{ route('todos.store') }}" method="POST">
         @csrf
         <div class="form-group">
             <input type="text" name="title" placeholder="TO-DO"/><br>
