@@ -1,92 +1,99 @@
+@charset "UTF-8";
 @import "~bootstrap/dist/css/bootstrap.min.css";
+.body {
+  background-color: #e6afcf !important;
+  font-size: 16px;
+}
 
 .container.mt-4 {
-    /* .container.mt-4 の両方がある要素にだけ適用されるスタイル */
-    max-width: 70vw;
-    margin-top: 2rem; /* 独自の上部マージン */
+  /* .container.mt-4 の両方がある要素にだけ適用されるスタイル */
+  max-width: 70vw;
+  margin-top: 2rem; /* 独自の上部マージン */
 }
+
 /* タスクカードのスタイル */
 .task-details {
-    background-color: #343a40; /* ダークグレーの背景 */
-    color: #ffffff; /* 白色の文字 */
-    padding: 1rem;
-    border-radius: 8px;
+  background-color: #343a40; /* ダークグレーの背景 */
+  color: #ffffff; /* 白色の文字 */
+  padding: 1rem;
+  border-radius: 8px;
 }
 
 /* タスクタイトルのスタイル */
 .task-title {
-    color: #ffffff;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: 1.2rem;
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.2rem;
 }
 
 /* ステータスラベルのスタイル */
 .status-label {
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 
 /* 進捗バーのスタイル */
 .progress {
-    height: 1rem; /* 進捗バーの高さ */
-    background-color: #ced4da; /* バーの背景色 */
-    border-radius: 5px;
-    overflow: hidden;
+  height: 1rem; /* 進捗バーの高さ */
+  background-color: #ced4da; /* バーの背景色 */
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .progress-bar {
-    background-color: #007bff; /* 青色のバー */
-    font-size: 0.75rem;
-    text-align: center;
-    color: white;
-    font-weight: bold;
+  background-color: #007bff; /* 青色のバー */
+  font-size: 0.75rem;
+  text-align: center;
+  color: white;
+  font-weight: bold;
 }
 
 /* ステータスの選択フィールドのスタイル */
 .form-select {
-    margin-top: 0.5rem;
-    color: #212529;
-    background-color: #f8f9fa;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
+  margin-top: 0.5rem;
+  color: #212529;
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
 }
 
 /* タスクカードのマージン調整 */
 .task-group .task-details {
-    margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .day-container {
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .page-set-container {
-    padding: 10px;
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 10px;
+  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
 }
 
 .btn-outline-primary {
-    border-color: #007bff;
-    color: #007bff;
+  border-color: #007bff;
+  color: #007bff;
 }
 
 .btn-outline-primary:hover {
-    background-color: #007bff;
-    color: #ffffff;
+  background-color: #007bff;
+  color: #ffffff;
 }
 
 .row-cols-3 {
-    background-color: #eb6ea0;
+  background-color: #eb6ea0;
 }
 
-.btn-primary{
-    color:#eb6ea0 !important;
+.btn-primary {
+  color: #eb6ea0 !important;
 }
 
+/*# sourceMappingURL=app.css.map */

@@ -11,13 +11,23 @@
 
 
 
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS ,CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <style>
+    body {
+      background-color: #e6afcf; /* お好みの背景色を指定してください */
+    }
+  </style>
+    
+    
+
+
      
   
 
 </head>
-<body class="bg-primary" style="background-color: #d1e8ff !important;">
+<body>
     <div class="min-h-screen">
         @include('layouts.navigation')
 
